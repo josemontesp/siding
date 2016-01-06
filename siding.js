@@ -3,8 +3,8 @@ var request = require('request');
 
 var constantes = {
     loginUrl: 'https://intrawww.ing.puc.cl/siding/index.phtml',
-    usuario: 'miusuario',
-    clave: 'mipass'
+    usuario: 'jemontes',
+    clave: 'xxxxxxx'
 };
 
 // Inicia sesión en Siding usando las credenciales en la variable constantes.
@@ -38,7 +38,7 @@ function sidingLogin() {
 //Recibe la cookie de la sesion generada por sidingLogin.
 //Retorna una Promesa con arreglo de cursos.
 function getCursos(sessionCookie) {
-    var url = 'https://intrawww.ing.puc.cl/siding/dirdes/ingcursos/cursos/index.phtml';
+    var url = 'https://intrawww.ing.puc.cl/siding/dirdes/ingcursos/cursos/index.phtml?per_lista_cursos=21_2016&acc_inicio=mis_cursos';
     return new Promise(function(resolve, reject) {
         request({
             url: url,
@@ -68,6 +68,7 @@ function getAvisosCurso(sessionCookie, idCurso){
 }
 
 sidingLogin().then(function(c) {
+    //console.log(c);
     return getCursos(c);
 }).then(function(c){
     console.log(c);
